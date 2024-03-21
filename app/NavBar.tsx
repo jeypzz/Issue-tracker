@@ -20,9 +20,9 @@ const NavBar = () => {
         {links.map((link) => (
           <Link
             className={classnames({
-              "text-slate-300": link.href !== currentPath,
-              "text-lime-300": link.href === currentPath,
-              "hover:text-lime-100 transition-colors": true,
+              "text-indigo-400": link.href !== currentPath,
+              "text-indigo-800": link.href === currentPath,
+              "hover:text-indigo-600 transition-colors": true,
             })}
             key={link.href}
             href={link.href}
