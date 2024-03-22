@@ -34,7 +34,11 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     try {
       setSubmitting(true);
       /* Send data to backend then Redirect user to /issues*/
-      await axios.post("/api/issues", data);
+      if (issue) {
+        axios.patch("/api/issues/" + issue.id, data);
+      } else {
+        await axios.post("/api/issues", data);
+      }
       router.push("/issues");
     } catch (error) {
       setSubmitting(false);
@@ -71,7 +75,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          Submit Issue {isSubmitting && <Spinner />}
+          {issue ? "Update Issue" : "Submit Issue"}{" "}
+          {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
